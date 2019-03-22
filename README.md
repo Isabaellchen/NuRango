@@ -1,1 +1,3 @@
 An example of a Nuxt created website with a Foxx Service for ArangoDB serving all the files. If only you had push capability by arango, that would be neet. Simply put this out in the open since this project laid dormant on my computer since November 2018...
+
+Just edit the gruntfile and use the grunt tasks for building and deployment

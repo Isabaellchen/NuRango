@@ -1,0 +1,30 @@
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    server {
+        listen       8015;
+        server_name  localhost;
+
+        sendfile        on;    
+        keepalive_timeout  65;
+
+        location / {
+            proxy_pass http://localhost:8529/app_identifier/;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Host $host:$server_port;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        access_log log_dir/access.log combined;
+        error_log log_dir/error.log warn;
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+}
